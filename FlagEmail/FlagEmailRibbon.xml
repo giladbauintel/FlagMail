@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="tabFlagEmail" label ="Flag Email">
+        <group id="grpFlagEmailConfig" label="Settings">
+          <dialogBoxLauncher>
+            <button imageMso="BevelTextGallery" id ="btnSettings" label="Settings" onAction="OnSettingsAction" />
+          </dialogBoxLauncher>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
