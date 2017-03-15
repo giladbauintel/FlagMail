@@ -4,8 +4,23 @@
     <tabs>
       <tab id="tabFlagEmail" label ="Flag Email">
         <group id="grpFlagEmailConfig" label="Settings">
+          <checkBox 
+            id="cbIncludeBody"        
+            label="Include Body"        
+            onAction="OnSettingsCheckboxAction" 
+            getPressed="SettingsCheckboxGetPressed"/>
+          <checkBox 
+            id="cbIncludeAttachments" 
+            label="Include Attachments" 
+            onAction="OnSettingsCheckboxAction" 
+            getPressed="SettingsCheckboxGetPressed"/>
+          <checkBox 
+            id="cbEditSubject"        
+            label="Edit Subject"        
+            onAction="OnSettingsCheckboxAction" 
+            getPressed="SettingsCheckboxGetPressed"/>
           <dialogBoxLauncher>
-            <button imageMso="BevelTextGallery" id ="btnSettings" label="Settings" onAction="OnSettingsAction" />
+            <button imageMso="BevelTextGallery" id ="btnSettings" label="Additional Settings" onAction="OnSettingsAction" />
           </dialogBoxLauncher>
         </group>
       </tab>

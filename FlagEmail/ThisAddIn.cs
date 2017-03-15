@@ -27,7 +27,34 @@ namespace FlagEmail
                 Properties.Settings.Default.Email != "")
             {
                 var forwardedItem = mailItem.Forward();
+                
                 forwardedItem.To = Properties.Settings.Default.Email;
+
+                if (Properties.Settings.Default.IncludeBody == false)
+                {
+                    forwardedItem.Body = "";
+                    forwardedItem.HTMLBody = "";
+                    forwardedItem.RTFBody = new byte[1];
+                }
+
+                if (Properties.Settings.Default.IncludeAttachments == false)
+                {
+                    foreach (Outlook.Attachment attachment in forwardedItem.Attachments)
+                    {
+                        attachment.Delete();
+                    }
+                }
+
+                if (Properties.Settings.Default.EditSubject)
+                {
+                    var subjectDialog = new EditSubjectDialog(forwardedItem.Subject);
+                    var dialogRes = subjectDialog.ShowDialog();
+                    if (dialogRes == System.Windows.Forms.DialogResult.OK)
+                    {
+                        forwardedItem.Subject = subjectDialog.Subject;
+                    }
+                }
+
                 forwardedItem.Send();
             }
         }

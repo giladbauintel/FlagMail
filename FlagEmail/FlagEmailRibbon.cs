@@ -56,9 +56,47 @@ namespace FlagEmail
             this.ribbon = ribbonUI;
         }
 
+        public bool SettingsCheckboxGetPressed(IRibbonControl control)
+        {
+            CheckBox checkboxControl = control as CheckBox;
+
+            switch (control.Id)
+            {
+                case "cbIncludeBody":
+                    return Properties.Settings.Default.IncludeBody;
+                case "cbIncludeAttachments":
+                    return Properties.Settings.Default.IncludeAttachments;
+                case "cbEditSubject":
+                    return Properties.Settings.Default.EditSubject;
+            }
+
+            return false;
+        }
+
+        public void OnSettingsCheckboxAction(IRibbonControl control, bool isChecked)
+        {
+            switch(control.Id)
+            {
+                case "cbIncludeBody":
+                    Properties.Settings.Default.IncludeBody = isChecked;
+                    break;
+                case "cbIncludeAttachments":
+                    Properties.Settings.Default.IncludeAttachments = isChecked;
+                    break;
+                case "cbEditSubject":
+                    Properties.Settings.Default.EditSubject = isChecked;
+                    break;
+                default:
+                    return;
+            }
+            
+            Properties.Settings.Default.Save();
+
+        }
+
         public string OnSettingsAction(IRibbonControl control)
         {
-            var dlg = new frmSettingsDialog();
+            var dlg = new SettingsDialog();
             var dlgRes = dlg.ShowDialog();
 
             if (dlgRes == DialogResult.OK)

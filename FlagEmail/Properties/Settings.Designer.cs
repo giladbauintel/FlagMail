@@ -34,5 +34,41 @@ namespace FlagEmail.Properties {
                 this["Email"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IncludeBody {
+            get {
+                return ((bool)(this["IncludeBody"]));
+            }
+            set {
+                this["IncludeBody"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IncludeAttachments {
+            get {
+                return ((bool)(this["IncludeAttachments"]));
+            }
+            set {
+                this["IncludeAttachments"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EditSubject {
+            get {
+                return ((bool)(this["EditSubject"]));
+            }
+            set {
+                this["EditSubject"] = value;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FlagEmail
 {
-    public partial class frmSettingsDialog : Form
+    public partial class SettingsDialog : Form
     {
         #region Properties
 
@@ -21,7 +21,7 @@ namespace FlagEmail
 
         #endregion
 
-        public frmSettingsDialog()
+        public SettingsDialog()
         {
             InitializeComponent();
 

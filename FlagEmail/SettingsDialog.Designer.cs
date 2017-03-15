@@ -1,6 +1,6 @@
 ﻿namespace FlagEmail
 {
-    partial class frmSettingsDialog
+    partial class SettingsDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -72,7 +72,7 @@
             this.lblEmail.TabIndex = 3;
             this.lblEmail.Text = "Forward Email:";
             // 
-            // frmSettingsDialog
+            // SettingsDialog
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,7 +86,7 @@
             this.Controls.Add(this.btnSave);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmSettingsDialog";
+            this.Name = "SettingsDialog";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
