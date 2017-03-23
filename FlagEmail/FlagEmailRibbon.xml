@@ -11,7 +11,7 @@
             getPressed="SettingsCheckboxGetPressed"/>
           <checkBox 
             id="cbIncludeAttachments" 
-            label="Include Attachments" 
+            label="Include File Attachments" 
             onAction="OnSettingsCheckboxAction" 
             getPressed="SettingsCheckboxGetPressed"/>
           <checkBox 

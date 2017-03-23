@@ -26,36 +26,46 @@ namespace FlagEmail
                 mailItem.FlagStatus != Outlook.OlFlagStatus.olFlagComplete &&
                 Properties.Settings.Default.Email != "")
             {
-                var forwardedItem = mailItem.Forward();
-                
-                forwardedItem.To = Properties.Settings.Default.Email;
+                var newItem = Application.CreateItem(Outlook.OlItemType.olMailItem) as Outlook.MailItem;
 
-                if (Properties.Settings.Default.IncludeBody == false)
-                {
-                    forwardedItem.Body = "";
-                    forwardedItem.HTMLBody = "";
-                    forwardedItem.RTFBody = new byte[1];
-                }
+                newItem.To = Properties.Settings.Default.Email;
+                newItem.Subject = mailItem.Subject;
 
-                if (Properties.Settings.Default.IncludeAttachments == false)
-                {
-                    foreach (Outlook.Attachment attachment in forwardedItem.Attachments)
-                    {
-                        attachment.Delete();
-                    }
-                }
+                bool includeBody        = Properties.Settings.Default.IncludeBody;
+                bool includeAttachments = Properties.Settings.Default.IncludeAttachments;
+                bool editSubject        = Properties.Settings.Default.EditSubject;
 
-                if (Properties.Settings.Default.EditSubject)
+                if (editSubject)
                 {
-                    var subjectDialog = new EditSubjectDialog(forwardedItem.Subject);
+                    var subjectDialog = new EditSubjectDialog(newItem.Subject);
                     var dialogRes = subjectDialog.ShowDialog();
                     if (dialogRes == System.Windows.Forms.DialogResult.OK)
                     {
-                        forwardedItem.Subject = subjectDialog.Subject;
+                        newItem.Subject = subjectDialog.Subject;
+                        includeBody = subjectDialog.IncludeBody;
+                        includeAttachments = subjectDialog.IncludeAttachments;
                     }
                 }
 
-                forwardedItem.Send();
+                if (includeBody)
+                {
+                    newItem.Body = mailItem.Body;
+                }
+
+                if (includeAttachments)
+                {
+                    foreach (Outlook.Attachment attachment in mailItem.Attachments)
+                    {
+                        if (attachment.Type == Outlook.OlAttachmentType.olByValue)
+                        {
+                            var tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), attachment.FileName);
+                            attachment.SaveAsFile(tempPath);
+                            newItem.Attachments.Add(tempPath, attachment.Type, attachment.Position, attachment.DisplayName);
+                        }
+                    }
+                }
+
+                newItem.Send();
             }
         }
         

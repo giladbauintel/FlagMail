@@ -19,6 +19,16 @@ namespace FlagEmail
             get { return tbSubject.Text; }
         }
 
+        public bool IncludeBody
+        {
+            get { return cbIncludeBody.Checked; }
+        }
+
+        public bool IncludeAttachments
+        {
+            get { return cbIncludeAttachments.Checked; }
+        }
+
         #endregion
 
         public EditSubjectDialog(string currentSubject)
@@ -27,6 +37,10 @@ namespace FlagEmail
 
             if (currentSubject != null)
                 tbSubject.Text = currentSubject;
+
+            cbIncludeBody.Checked        = Properties.Settings.Default.IncludeBody;
+            cbIncludeAttachments.Checked = Properties.Settings.Default.IncludeAttachments;
+
         }
     }
 }
