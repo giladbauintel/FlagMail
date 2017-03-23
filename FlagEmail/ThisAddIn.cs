@@ -45,6 +45,8 @@ namespace FlagEmail
                         includeBody = subjectDialog.IncludeBody;
                         includeAttachments = subjectDialog.IncludeAttachments;
                     }
+                    else
+                        return;
                 }
 
                 if (includeBody)
