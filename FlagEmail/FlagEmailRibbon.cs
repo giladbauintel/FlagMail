@@ -8,6 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Office = Microsoft.Office.Core;
+using System.Runtime.Serialization.Json;
+using System.Xml.Linq;
+using System.Web.Helpers;
+
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
 
@@ -35,8 +39,11 @@ namespace FlagEmail
     {
         private Office.IRibbonUI ribbon;
 
+        public MembersDB membersDB;
+
         public FlagEmailRibbon()
         {
+            membersDB = MembersDB.Instance;
         }
 
         #region IRibbonExtensibility Members
@@ -112,11 +119,26 @@ namespace FlagEmail
                 {
                     MessageBox.Show("Email must be a valid address!", "Invalid Email!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                //TODO: validate path
+                if (dlg.JSONPath != null && dlg.JSONPath != "")
+                {
+                    string JSONPath = dlg.JSONPath.Trim();
+
+                    Properties.Settings.Default.JSONPath = JSONPath;
+                    Properties.Settings.Default.Save();
+
+                    membersDB.loadJSON(JSONPath);
+                }
+                else
+                {
+
+                }
+
             }
 
             return dlgRes.ToString();
         }
-
         #endregion
 
         #region Helpers

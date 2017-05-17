@@ -12,6 +12,8 @@ namespace FlagEmail
     {
         private Outlook.Items mToDoItems = null;
 
+        public MembersDB membersDB;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Outlook.Folder todoFolder = Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderToDo) as Outlook.Folder;
@@ -38,10 +40,19 @@ namespace FlagEmail
                 if (editSubject)
                 {
                     var subjectDialog = new EditSubjectDialog(newItem.Subject);
+
+                    subjectDialog.LoadMembers();
+
                     var dialogRes = subjectDialog.ShowDialog();
+                    
+
                     if (dialogRes == System.Windows.Forms.DialogResult.OK)
                     {
                         newItem.Subject = subjectDialog.Subject;
+
+                        if (subjectDialog.IncludeMembers)
+                            newItem.Subject += subjectDialog.getMembersString();
+
                         includeBody = subjectDialog.IncludeBody;
                         includeAttachments = subjectDialog.IncludeAttachments;
                     }
@@ -67,7 +78,7 @@ namespace FlagEmail
                     }
                 }
 
-                newItem.Send();
+                ((Microsoft.Office.Interop.Outlook._MailItem)newItem).Send();
             }
         }
         
