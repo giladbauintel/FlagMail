@@ -7,6 +7,8 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        public MembersDB membersDB;
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -34,13 +36,15 @@
             this.lblSubject = new System.Windows.Forms.Label();
             this.cbIncludeBody = new System.Windows.Forms.CheckBox();
             this.cbIncludeAttachments = new System.Windows.Forms.CheckBox();
+            this.lbMembers = new System.Windows.Forms.ListBox();
+            this.cbMembers = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSave.Location = new System.Drawing.Point(12, 94);
+            this.btnSave.Location = new System.Drawing.Point(12, 116);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -51,7 +55,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(465, 94);
+            this.btnCancel.Location = new System.Drawing.Point(465, 116);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -95,14 +99,37 @@
             this.cbIncludeAttachments.Text = "Include File Attachments";
             this.cbIncludeAttachments.UseVisualStyleBackColor = true;
             // 
+            // lbMembers
+            // 
+            this.lbMembers.Enabled = false;
+            this.lbMembers.FormattingEnabled = true;
+            this.lbMembers.Location = new System.Drawing.Point(93, 85);
+            this.lbMembers.Name = "lbMembers";
+            this.lbMembers.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbMembers.Size = new System.Drawing.Size(120, 69);
+            this.lbMembers.TabIndex = 8;
+            // 
+            // cbMembers
+            // 
+            this.cbMembers.AutoSize = true;
+            this.cbMembers.Location = new System.Drawing.Point(12, 85);
+            this.cbMembers.Name = "cbMembers";
+            this.cbMembers.Size = new System.Drawing.Size(72, 17);
+            this.cbMembers.TabIndex = 9;
+            this.cbMembers.Text = "Members:";
+            this.cbMembers.UseVisualStyleBackColor = true;
+            this.cbMembers.CheckStateChanged += new System.EventHandler(this.cbMembers_CheckStateChanged);
+            // 
             // EditSubjectDialog
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(552, 138);
+            this.ClientSize = new System.Drawing.Size(552, 160);
             this.ControlBox = false;
+            this.Controls.Add(this.cbMembers);
+            this.Controls.Add(this.lbMembers);
             this.Controls.Add(this.cbIncludeAttachments);
             this.Controls.Add(this.cbIncludeBody);
             this.Controls.Add(this.lblSubject);
@@ -130,5 +157,7 @@
         private System.Windows.Forms.Label lblSubject;
         private System.Windows.Forms.CheckBox cbIncludeBody;
         private System.Windows.Forms.CheckBox cbIncludeAttachments;
+        private System.Windows.Forms.ListBox lbMembers;
+        private System.Windows.Forms.CheckBox cbMembers;
     }
 }
