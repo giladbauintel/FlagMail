@@ -34,7 +34,7 @@ namespace FlagEmail
             tbJSONPath.Text = Properties.Settings.Default.JSONPath;
         }
 
-        private void tbJSONPath_DoubleClick(object sender, EventArgs e)
+        private void btnOpenFile_KeyPressed(object sender, EventArgs e)
         {
             if (openJSON.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

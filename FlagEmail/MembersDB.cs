@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FlagEmail
 {
@@ -119,6 +121,8 @@ namespace FlagEmail
             //    jsonString = reader.ReadToEnd();           
             //}            
             //else 
+
+            Debug.WriteLine("Reading JSON");
             if (File.Exists(JSONPath))
             {                        
                 using (StreamReader r = new StreamReader(JSONPath))
@@ -128,20 +132,33 @@ namespace FlagEmail
             }
             else
             {
+                MessageBox.Show("Configuration file does not exist!", "File not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            
-            dynamic json = System.Web.Helpers.Json.Decode(jsonString);
-            dynamic members = json.members;
 
-            if (members != null)
+            Debug.WriteLine("JSON read. Decoding");
+            
+            try
             {
-                for (int i = 0; i < members.Length; ++i)
-                    Add(members[i].initials, members[i].fullName, members[i].username);
+                dynamic json = System.Web.Helpers.Json.Decode(jsonString);
+                dynamic members = json.members;
+
+                if (members != null)
+                {
+                    for (int i = 0; i < members.Length; ++i)
+                        Add(members[i].initials, members[i].fullName, members[i].username);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Configuration file is not valid!", "File is invalid!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
             initialized = true;
 
+            System.Diagnostics.Debug.WriteLine("JSON Decoded");
+                
             return true;
         }
     }

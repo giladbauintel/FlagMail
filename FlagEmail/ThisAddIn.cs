@@ -5,6 +5,8 @@ using System.Text;
 using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
+using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace FlagEmail
 {
@@ -23,6 +25,8 @@ namespace FlagEmail
 
         void Items_ItemAdd(object Item)
         {
+            Debug.WriteLine("Adding task");
+
             var mailItem = Item as Outlook.MailItem;
             if (mailItem != null &&
                 mailItem.FlagStatus != Outlook.OlFlagStatus.olFlagComplete &&
@@ -33,18 +37,23 @@ namespace FlagEmail
                 newItem.To = Properties.Settings.Default.Email;
                 newItem.Subject = mailItem.Subject;
 
-                bool includeBody        = Properties.Settings.Default.IncludeBody;
+                bool includeBody = Properties.Settings.Default.IncludeBody;
                 bool includeAttachments = Properties.Settings.Default.IncludeAttachments;
-                bool editSubject        = Properties.Settings.Default.EditSubject;
+                bool editSubject = Properties.Settings.Default.EditSubject;
 
                 if (editSubject)
                 {
                     var subjectDialog = new EditSubjectDialog(newItem.Subject);
 
+
+                    Debug.WriteLine("Loading members");
+
                     subjectDialog.LoadMembers();
 
-                    var dialogRes = subjectDialog.ShowDialog();
+                    Debug.WriteLine("Finished loading members");
                     
+                    var dialogRes = subjectDialog.ShowDialog();
+
 
                     if (dialogRes == System.Windows.Forms.DialogResult.OK)
                     {
@@ -79,6 +88,17 @@ namespace FlagEmail
                 }
 
                 ((Microsoft.Office.Interop.Outlook._MailItem)newItem).Send();
+            }
+            else
+            {
+                if (mailItem == null)
+                {
+                    MessageBox.Show("Failed to add task! mailItem is null", "Failed task!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to add task! email: " + Properties.Settings.Default.Email, "Failed task!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                
             }
         }
         

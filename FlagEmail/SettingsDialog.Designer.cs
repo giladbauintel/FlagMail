@@ -35,6 +35,7 @@
             this.lblJSON = new System.Windows.Forms.Label();
             this.tbJSONPath = new System.Windows.Forms.TextBox();
             this.openJSON = new System.Windows.Forms.OpenFileDialog();
+            this.btnOpenFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSave
@@ -80,17 +81,26 @@
             this.lblJSON.AutoSize = true;
             this.lblJSON.Location = new System.Drawing.Point(9, 49);
             this.lblJSON.Name = "lblJSON";
-            this.lblJSON.Size = new System.Drawing.Size(62, 13);
+            this.lblJSON.Size = new System.Drawing.Size(88, 13);
             this.lblJSON.TabIndex = 4;
-            this.lblJSON.Text = "JSON path:";
+            this.lblJSON.Text = "Configuration file:";
             // 
             // tbJSONPath
             // 
             this.tbJSONPath.Location = new System.Drawing.Point(97, 46);
             this.tbJSONPath.Name = "tbJSONPath";
-            this.tbJSONPath.Size = new System.Drawing.Size(175, 20);
+            this.tbJSONPath.Size = new System.Drawing.Size(143, 20);
             this.tbJSONPath.TabIndex = 5;
-            this.tbJSONPath.DoubleClick += new System.EventHandler(this.tbJSONPath_DoubleClick);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(246, 44);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(26, 23);
+            this.btnOpenFile.TabIndex = 6;
+            this.btnOpenFile.Text = "...";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_KeyPressed);
             // 
             // SettingsDialog
             // 
@@ -100,6 +110,7 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(284, 128);
             this.ControlBox = false;
+            this.Controls.Add(this.btnOpenFile);
             this.Controls.Add(this.tbJSONPath);
             this.Controls.Add(this.lblJSON);
             this.Controls.Add(this.lblEmail);
@@ -128,5 +139,6 @@
         private System.Windows.Forms.Label lblJSON;
         private System.Windows.Forms.TextBox tbJSONPath;
         private System.Windows.Forms.OpenFileDialog openJSON;
+        private System.Windows.Forms.Button btnOpenFile;
     }
 }
