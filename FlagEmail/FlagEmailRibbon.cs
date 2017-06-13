@@ -11,7 +11,7 @@ using Office = Microsoft.Office.Core;
 using System.Runtime.Serialization.Json;
 using System.Xml.Linq;
 using System.Web.Helpers;
-
+using System.Diagnostics;
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
 
@@ -109,6 +109,8 @@ namespace FlagEmail
             if (dlgRes == DialogResult.OK)
             {
                 // Check for email
+                Debug.WriteLine("Fetching e-mail address");
+                
                 if (dlg.Email != null && dlg.Email != "" && dlg.Email != " " &&
                     dlg.Email.Contains("@") && dlg.Email.Contains("."))
                 {
@@ -120,21 +122,23 @@ namespace FlagEmail
                     MessageBox.Show("Email must be a valid address!", "Invalid Email!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                //TODO: validate path
+                Debug.WriteLine("Finished fetching e-mail address");
+
                 if (dlg.JSONPath != null && dlg.JSONPath != "")
                 {
+                    Debug.WriteLine("Fetching JSON");
+
                     string JSONPath = dlg.JSONPath.Trim();
 
                     Properties.Settings.Default.JSONPath = JSONPath;
                     Properties.Settings.Default.Save();
-
+                 
                     membersDB.loadJSON(JSONPath);
                 }
                 else
                 {
-
+                    // no json
                 }
-
             }
 
             return dlgRes.ToString();

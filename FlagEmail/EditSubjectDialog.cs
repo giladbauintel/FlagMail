@@ -49,12 +49,12 @@ namespace FlagEmail
         public void LoadMembers()
         {
             membersDB = MembersDB.Instance;
+
             if (!membersDB.Initialized && Properties.Settings.Default.JSONPath != "")
                 membersDB.loadJSON(Properties.Settings.Default.JSONPath);
-
+           
             lbMembers.DataSource = membersDB.getTable();
-            lbMembers.DisplayMember = "FullName";
-                    
+            lbMembers.DisplayMember = "FullName";                    
         }
 
         public string getMembersString()
