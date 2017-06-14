@@ -29,7 +29,7 @@ namespace FlagEmail
             column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "Initials";
             column.ReadOnly = true;
-            column.Unique = true;
+            column.Unique = false;
             membersTable.Columns.Add(column);
 
             //Create Full Name column
@@ -37,7 +37,7 @@ namespace FlagEmail
             column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "FullName";
             column.ReadOnly = true;
-            column.Unique = true;
+            column.Unique = false;
             membersTable.Columns.Add(column);
 
             //Create Username column
@@ -49,7 +49,7 @@ namespace FlagEmail
             membersTable.Columns.Add(column);
 
             DataColumn[] PrimaryKeyColumns = new DataColumn[1];
-            PrimaryKeyColumns[0] = membersTable.Columns["Initials"];
+            PrimaryKeyColumns[0] = membersTable.Columns["Username"];
             membersTable.PrimaryKey = PrimaryKeyColumns;
         }
 
